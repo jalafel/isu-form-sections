@@ -40,9 +40,10 @@ gulp.task('minify', function(){
   return gulp.src(['src/*.js', 'src/directives/*.js', 'src/tpl/*.js', 'src/factories/*.js'])
     // Minifies only if it's a JavaScript file
     .pipe(concat('isu-form-sections.js'))
-    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulp.dest('dist'))
     .pipe(rename({
-            suffix: '.min'
-        }))
+        suffix: '.min'
+    }))
+    .pipe(gulpIf('*.js', uglify()))
     .pipe(gulp.dest('dist'))
 });
