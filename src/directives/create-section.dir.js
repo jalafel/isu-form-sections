@@ -23,7 +23,7 @@ function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
 				   ' type ' + $interpolate.endSymbol() + ' Section</md-option>',
 				   '</md-select>'].join(''),
 		controllerAs: 'create',
-		controller: isuCreateSectionController,
+		controller: ['$scope', isuCreateSectionController],
 		link: isuCreateSectionLink
 	};
 

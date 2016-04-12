@@ -49,7 +49,7 @@ function inlineImageSection($interpolate) {
 
 	return {
 		replace:true,
-		controller: function($scope) {
+		controller: ['$scope', function($scope) {
 
 			$scope.imageFields = [0];
 			
@@ -68,7 +68,7 @@ function inlineImageSection($interpolate) {
 				}).filter(function(o){ return !angular.isUndefined(o); });
 			}
 	
-		},
+		}],
 		link: function(scope, el, attrs) {
 			var len = null;
 			var destroyWatch = scope.$watch(function(){
