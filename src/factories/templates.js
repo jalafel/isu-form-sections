@@ -8,7 +8,8 @@
 
 angular
 .module('isu.templates', ['isu.provider'])
-.factory('TemplateFactory', function(isuSectionProvider) {
+.factory('TemplateFactory', ['isuSectionProvider',
+    function(isuSectionProvider) {
 
 	'use strict';
 
@@ -67,4 +68,4 @@ angular
     };
 
     return Template;
-});
+}]);

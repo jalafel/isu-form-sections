@@ -4,7 +4,9 @@
  */
 angular
 	.module('isu.sections', ['isu.templates', 'isu.provider'])
-	.factory('Section', function(TemplateFactory, isuSectionProvider) {
+	.factory('Section', ['TemplateFactory', 'isuSectionProvider',
+
+    function(TemplateFactory, isuSectionProvider) {
 
 	  'use strict';
 
@@ -95,7 +97,4 @@ angular
    	* Return the constructor function
    	*/
    	return Section;
-});
-
-
-
+}]);

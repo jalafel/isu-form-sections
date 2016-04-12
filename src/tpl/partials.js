@@ -13,6 +13,10 @@ angular.module('isu-form-sections')
 .directive('inlineImageSection', inlineImageSection)
 .directive('profileSection', profileSection);
 
+textSection.$inject = ['$interpolate'];
+inlineImageSection.$inject = ['$interpolate'];
+profileSection.$inject = ['$interpolate'];
+
 function textSection($interpolate) {
 	'use strict';
 

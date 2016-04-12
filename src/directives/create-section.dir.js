@@ -4,7 +4,7 @@
  */
 angular
 .module('isu.create-section', ['isu.sections', 'isu.provider'])
-.directive('isuCreateSection', 
+.directive('isuCreateSection',  ['$compile', '$interpolate', '$timeout', 'Section', 'isuSectionProvider',
 
 function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
 	
@@ -229,4 +229,4 @@ function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
 
 
 
-});
+}]);

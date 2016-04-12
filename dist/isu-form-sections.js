@@ -135,7 +135,7 @@ angular.module('isu.provider', [])
  */
 angular
 .module('isu.create-section', ['isu.sections', 'isu.provider'])
-.directive('isuCreateSection', 
+.directive('isuCreateSection',  ['$compile', '$interpolate', '$timeout', 'Section', 'isuSectionProvider',
 
 function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
 	
@@ -360,7 +360,7 @@ function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
 
 
 
-});
+}]);
 
 /**
  * @description
@@ -404,7 +404,7 @@ angular
 
 angular
 	.module('isu.form-init', ['isu.provider'])
-	.directive('isuSectionInit',
+	.directive('isuSectionInit', ['isuSectionProvider',
 
 function(isuSectionProvider) {
 	return {
@@ -497,7 +497,7 @@ function(isuSectionProvider) {
 			}
 		}
 	};
-});
+}]);
 /**
  * @description: template provider for Template Factory
  * 	 - uses TextAngular library and Material Design decorators
@@ -512,6 +512,10 @@ angular.module('isu-form-sections')
 .directive('textSection', textSection)
 .directive('inlineImageSection', inlineImageSection)
 .directive('profileSection', profileSection);
+
+textSection.$inject = ['$interpolate'];
+inlineImageSection.$inject = ['$interpolate'];
+profileSection.$inject = ['$interpolate'];
 
 function textSection($interpolate) {
 	'use strict';
@@ -676,7 +680,9 @@ function profileSection($interpolate) {
  */
 angular
 	.module('isu.sections', ['isu.templates', 'isu.provider'])
-	.factory('Section', function(TemplateFactory, isuSectionProvider) {
+	.factory('Section', ['TemplateFactory', 'isuSectionProvider',
+
+    function(TemplateFactory, isuSectionProvider) {
 
 	  'use strict';
 
@@ -767,11 +773,7 @@ angular
    	* Return the constructor function
    	*/
    	return Section;
-});
-
-
-
-
+}]);
 /**
 *   @description
 *   @name: TemplateFactory
@@ -782,7 +784,8 @@ angular
 
 angular
 .module('isu.templates', ['isu.provider'])
-.factory('TemplateFactory', function(isuSectionProvider) {
+.factory('TemplateFactory', ['isuSectionProvider',
+    function(isuSectionProvider) {
 
 	'use strict';
 
@@ -841,4 +844,4 @@ angular
     };
 
     return Template;
-});
+}]);

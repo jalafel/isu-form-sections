@@ -19,7 +19,7 @@
 
 angular
 	.module('isu.form-init', ['isu.provider'])
-	.directive('isuSectionInit',
+	.directive('isuSectionInit', ['isuSectionProvider',
 
 function(isuSectionProvider) {
 	return {
@@ -112,4 +112,4 @@ function(isuSectionProvider) {
 			}
 		}
 	};
-});
+}]);
