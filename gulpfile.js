@@ -6,6 +6,7 @@ var gulpIf = require('gulp-if');
 var rename = require('gulp-rename');
 var pkg = require('./package.json');
 var concat = require('gulp-concat');
+var ngAnnotate = require('gulp-ng-annotate');
 
 gulp.task('default',function() {
   // place code for your default task here
@@ -44,6 +45,7 @@ gulp.task('minify', function(){
     .pipe(rename({
         suffix: '.min'
     }))
+    .pipe(ngAnnotate())
     .pipe(gulpIf('*.js', uglify()))
     .pipe(gulp.dest('dist'))
 });
