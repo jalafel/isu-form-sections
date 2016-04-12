@@ -3,9 +3,9 @@
   "main": "dist/isu-form-sections.js",
   "homepage": "https://github.com/jalafel/isu-form-sections",
   "authors": [ "Jessica Tran" ],
-  "description": "Adds paging functionality to Knockout.",
+  "description": "Adds form functionality to AngularJS with verge API.",
   "keywords": [ "angular", "isu", "form-sections" ],
-  "license": "Apache",
+  "license": "MIT",
   "ignore": [
     "*",
     "!dist/*"
