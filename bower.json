@@ -1,0 +1,16 @@
+{
+  "name": "isu-form-sections",
+  "main": "dist/isu-form-sections.js",
+  "homepage": "https://github.com/jalafel/isu-form-sections",
+  "authors": [ "Jessica Tran" ],
+  "description": "Adds paging functionality to Knockout.",
+  "keywords": [ "angular", "isu", "form-sections" ],
+  "license": "Apache",
+  "ignore": [
+    "*",
+    "!dist/*"
+  ],
+  "dependencies": {
+    "angular": "^1.3.1"
+  }
+}

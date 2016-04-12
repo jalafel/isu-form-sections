@@ -1,0 +1,21 @@
+{
+  "name": "isu-form-sections",
+  "version": "0.0.1",
+  "description": "Adds form sections functionality to AngularJS.",
+  "main": "dist/knockout-paging.js",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
+  "repository": { 
+    "type": "git", 
+    "url": "git@github.com/jalafel/isu-form-sections.git" 
+  },
+  "keywords": [ "angular"],
+  "author": "Jessica Tran",
+  "bugs": { 
+    "url": "https://github.com/jalafel/isu-form-sections/issues" 
+  },
+  "homepage": "https://github.com/jalafel/isu-form-sections"
+}
