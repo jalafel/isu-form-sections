@@ -78,6 +78,9 @@ function(isuSectionProvider) {
 					var opts = angular.extend({}, scope.$eval(attrs.isuSectionInit));
 					var object = angular.extend({}, scope.$eval(attrs.isuSectionObject));
 
+					if(opts.hasOwnProperty('autopost') && !opts.autopost)
+						return false;
+
 					angular.extend(isuSectionProvider.defaults, opts || {});
 
 					isuSectionProvider.callMethodToApi(object).then(function(success){

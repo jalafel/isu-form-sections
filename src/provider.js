@@ -12,6 +12,7 @@ angular.module('isu.provider', [])
 		useDefaultTemplate: true,
 		method: 'POST',
 		target: '/',
+		autopost: true,
 		fileEndpoint: '/justTheFile/', // fileEndpoint for get && post
 		templateDefaults: null,
 		types: null,
