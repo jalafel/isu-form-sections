@@ -15,6 +15,7 @@ angular.module('isu.provider', [])
 		useDefaultTemplate: true,
 		method: 'POST',
 		target: '/',
+		autopost: true,
 		fileEndpoint: '/justTheFile/', // fileEndpoint for get && post
 		templateDefaults: null,
 		types: null,
@@ -462,6 +463,9 @@ function(isuSectionProvider) {
 
 					var opts = angular.extend({}, scope.$eval(attrs.isuSectionInit));
 					var object = angular.extend({}, scope.$eval(attrs.isuSectionObject));
+
+					if(opts.hasOwnProperty('autopost') && !opts.autopost)
+						return false;
 
 					angular.extend(isuSectionProvider.defaults, opts || {});
 
