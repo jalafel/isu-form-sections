@@ -105,7 +105,7 @@ function inlineImageSection($interpolate) {
 					
 					'<md-input-container>',
 					'<label>URL</label>',
-					'<input type="url" ng-model="sections[$sIndex].content[rIndex].url"/>',
+					'<input type="url" ng-model="sections[$sIndex].content[rIndex].url" format-http/>',
 					'</md-input-container>',
 					
 					'</fieldset>',
