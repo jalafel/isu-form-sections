@@ -4,9 +4,9 @@
  */
 angular
 .module('isu.create-section', ['isu.sections', 'isu.provider'])
-.directive('isuCreateSection',  ['$compile', '$interpolate', '$timeout', 'Section', 'isuSectionProvider',
+.directive('isuCreateSection',  ['$rootScope', '$compile', '$interpolate', '$timeout', 'Section', 'isuSectionProvider',
 
-function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
+function ($rootScope, $compile, $interpolate, $timeout, Section, isuSectionProvider) {
 	
 	'use strict';
 
@@ -181,7 +181,7 @@ function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
 		scope.$watch('create.type', function(type){
         	if(type && !angular.isUndefined(type)){
     	        ctrl.type = null; // resets to default
-            	scope.$emit('compileSectionToView', 
+            	$rootScope.$emit('compileSectionToView', 
             		{section: new Section(type, ctrl.nextOrderance()) });
            }
 		}, true);
@@ -205,7 +205,7 @@ function ($compile, $interpolate, $timeout, Section, isuSectionProvider) {
         *	
         *  TODO: needs more error handling
         */
-		scope.$on('compileSectionToView', function(ev, data) {
+		$rootScope.$on('compileSectionToView', function(ev, data) {
 			ev.preventDefault();
 
 			if(!data.hasOwnProperty('section'))
