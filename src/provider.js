@@ -81,8 +81,10 @@ angular.module('isu.provider', [])
 	                		if(i instanceof File)
 	                			fd.append(t, i)
 	                		// checks for primitive number and string that does not begin with $
-	                		if (typeof e === 'number' || ( e.charAt(0) !== '$' ))
+	                		if (typeof e === 'number' || ( e.charAt(0) !== '$' || e instanceof Date))
 	                			transformObjectToFormData(fd, i, t);
+
+
 	                	} else
 	                		fd.append(key+'['+e+']', i);
                 	});
