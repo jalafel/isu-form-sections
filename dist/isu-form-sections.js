@@ -23,6 +23,7 @@ angular.module('isu.provider', [])
             type: 'Text',
             html: '<text-section></text-section>',
             url: '/section/tpl/textSection.tpl.html', // these URLs aren't working yet
+            schema: { text: null }	// for when Section is built and content is null.
         },
         {
             type: 'InlineImage',
@@ -83,10 +84,8 @@ angular.module('isu.provider', [])
                 			var t = key+'['+e+']';
 	                		if(i instanceof File)
 	                			fd.append(t, i)
-	                		if(i instanceof Date)
-	                			fd.append(t, i)
 	                		// checks for primitive number and string that does not begin with $
-	                		if (typeof e === 'number' || ( e.charAt(0) !== '$' || e instanceof Date))
+	                		if (typeof e === 'number' || ( e.charAt(0) !== '$'))
 	                			transformObjectToFormData(fd, i, t);
 
 
