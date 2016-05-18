@@ -23,12 +23,14 @@ angular.module('isu.provider', [])
             type: 'Text',
             html: '<text-section></text-section>',
             url: '/section/tpl/textSection.tpl.html', // these URLs aren't working yet
+            schemaIsArray: false,
             schema: { text: null }	// for when Section is built and content is null.
         },
         {
             type: 'InlineImage',
             html: '<inline-image-section></inline-image-section>',
             url: '/section/tpl/inlinePhotoSection.tpl.html',
+            schemaIsArray: true,
             schema: { image: { file: null, description: null, user_id: null }, 
             		  file_id: null, url: null }
 	    },
@@ -36,6 +38,8 @@ angular.module('isu.provider', [])
             type: 'Profile',
             html: '<profile-section></profile-section>',
             url: '/section/tpl/ProfileSection.tpl.html',
+            schemaIsArray: false,
+            schema: { text: null }
 	    }]
 	};
 	
@@ -57,11 +61,14 @@ angular.module('isu.provider', [])
 			*	Primarily important for creating content arrays.
 			*/
 			getContentOf: function(type) {
-				return this.defaults.possibleTypes.map(function(o){
-					return o.type === type ? ( o.schema || undefined ) : undefined;
-				}).filter(function(o){
-					return !angular.isUndefined(o);
+				var schema = undefined;
+
+				this.defaults.possibleTypes.forEach(function(o){
+					if(o.type === type) {
+						schema = o.schemaIsArray ? [o.schema] : o.schema;
+					}
 				});
+				return schema;
 			},
 
 			/**
