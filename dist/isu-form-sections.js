@@ -268,7 +268,7 @@ function ($rootScope, $compile, $interpolate, $timeout, Section, isuSectionProvi
 		this.persistExisting = persistExisting;
 		function persistExisting(collection) {
 			angular.forEach(collection, function(o, k){
-				if(o.hasOwnProperty('images')) 
+				if(o.hasOwnProperty('images') && o.images !== null) 
 					o.content = o.content.map(function(m){
 						for(var i = 0; i < o.images.length; i++) {
 							if(o.images[i].file_id == m.file_id){
