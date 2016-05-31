@@ -77,7 +77,7 @@ angular.module('isu.provider', [])
 			transformToFormData: function(data) {  //consider exporting this into a service library for personal usage;
 				var _fd = new FormData();
                 angular.forEach(data, function (val, key) {
-                	if(!val) return;
+                	if(!val && angular.isUndefined(val)) return;
 
                 	if(typeof val === 'object' && Object.keys(val).length !== 0)
 	                    transformObjectToFormData(_fd, val, key);
@@ -96,7 +96,7 @@ angular.module('isu.provider', [])
 	                			transformObjectToFormData(fd, i, t);
 
 
-	                	} else
+	                	} else if(!angular.isUndefined(i))
 	                		fd.append(key+'['+e+']', i);
                 	});
                 }
@@ -268,7 +268,7 @@ function ($rootScope, $compile, $interpolate, $timeout, Section, isuSectionProvi
 		this.persistExisting = persistExisting;
 		function persistExisting(collection) {
 			angular.forEach(collection, function(o, k){
-				if(o.hasOwnProperty('images') && o.images !== null) 
+				if(o.hasOwnProperty('images')) 
 					o.content = o.content.map(function(m){
 						for(var i = 0; i < o.images.length; i++) {
 							if(o.images[i].file_id == m.file_id){
