@@ -31,7 +31,7 @@ angular
 		}
 	}
 ])
-.directive('isuSectionable', ['isuSectionProvider', 'debouncer', '$filter',
+.directive('sectionable', ['isuSectionProvider', 'debouncer', '$filter',
 	function(isuSectionProvider, debouncer, $filter) {
 		return {
 			restrict: 'A',
