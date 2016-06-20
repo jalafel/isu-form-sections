@@ -29,7 +29,7 @@ function textSection($interpolate) {
 					'sectionable section-id="sections[$sIndex].id || null" save-message="saveMessage">',
 					'<md-toolbar>',
 					'<header>Text Section</header>',
-					'<i>'+s+'saveMessage'+e+'</i>',
+					'<i class="display__save-messsage">'+s+'saveMessage'+e+'</i>',
 					'<a class="mdi button mdi-chevron-up" ng-click="create.move(sections[$sIndex].order, false)"></a>',
 					'<a class="mdi button mdi-chevron-down" ng-click="create.move(sections[$sIndex].order, true)"></a>',
 					'<a class="mdi button mdi-close" ng-click="create.remove(sections[$sIndex].order)"></a>',
