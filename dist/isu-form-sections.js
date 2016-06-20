@@ -77,7 +77,7 @@ angular.module('isu.provider', [])
 			transformToFormData: function(data) {  //consider exporting this into a service library for personal usage;
 				var _fd = new FormData();
                 angular.forEach(data, function (val, key) {
-                	if(!val || angular.isUndefined(val)) return;
+                	if(val === null || val === '' || angular.isUndefined(val)) return;
 
                 	if(typeof val === 'object' && Object.keys(val).length !== 0)
 	                    transformObjectToFormData(_fd, val, key);
