@@ -226,7 +226,5 @@ function ($rootScope, $compile, $interpolate, $timeout, Section, isuSectionProvi
 	        el.append(directiveElement);
 		});
 	}
-
-
-
+	
 }]);

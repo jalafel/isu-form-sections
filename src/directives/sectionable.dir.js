@@ -31,15 +31,30 @@ angular
 		}
 	}
 ])
-.directive('sectionable', ['isuSectionProvider', 'debouncer', '$filter',
-	function(isuSectionProvider, debouncer, $filter) {
+.directive('sectionable', ['isuSectionProvider', 'debouncer', '$filter', '$timeout', '$rootScope',
+	function(isuSectionProvider, debouncer, $filter, $timeout) {
 		return {
 			restrict: 'A',
 			scope: {
 				'sectionId': '=',
 				'saveMessage': '='
-				},
-			link: function(scope, el, attrs) {
+			},
+			controller: ['$scope', function($scope) {
+			  	
+			    var newDebounce = new debouncer.Debounce();
+
+			  	this.destroy = destroy;
+			  	function destroy(type) {
+			  		$scope.$emit('destroySectionFromView', {contentType: type});
+			  	}
+			  	this.move = move;
+			  	function move() {
+			  		$timeout(function(){
+			  			$scope.$emit('saveAllSections', {});
+			  		}, 1000);
+			  	}
+			}],
+			link: function(scope, el, attrs, ctrl) {
 
 				var url = window.location.pathname;
 					url = url.substr(0, url.length - 4);
@@ -48,9 +63,8 @@ angular
 
 			    scope.saveMessage = '';
 
-				el.bind('keyup', function(ev) {
+				el.bind('keydown keyup', function(ev) {
 
-					ev.preventDefault();
 				  	
 				  	var update = function() {
 						var content = getContent();
@@ -59,9 +73,7 @@ angular
 
 						angular.extend(isuSectionProvider.defaults, { target: target, method: 'PATCH'});		
 						isuSectionProvider.callMethodToApi(content).then(function(success){
-
 							setSaveMessage(success.updated_at);
-
 						}, function(error){
 							throw new Error("Unable to update this " + contentType + ' section');
 						});
@@ -83,11 +95,45 @@ angular
 
 				  	var applyMethod = function() {
 				  		scope.saveMessage = 'Saving ...';
-				  		return scope.sectionId ? update() : make();
+				  		var content = getContent();
+				  		return scope.sectionId ? update(content) : make(content);
 				  	}
 
 					newDebounce.Invoke(function(){ scope.$apply(applyMethod); }, 1000, false);
 				});
+
+			  	scope.$on('destroySectionFromView', function(ev, data) {
+			  		ev.preventDefault();
+					var contentType = data.contentType.toLowerCase();
+			  		var target = url.concat(contentType+'section/'+scope.sectionId);
+
+					angular.extend(isuSectionProvider.defaults, { target: target, method: 'DELETE'});
+					isuSectionProvider.callMethodToApi().then(function(success){
+					}, function(error){
+						throw new Error("Unable to delete this " + contentType + ' section');
+					});
+				})
+
+			  	scope.$on('saveAllSections', function(ev, data) {
+			  		ev.preventDefault();
+
+			  		var sections = getSections();
+
+			  		for(var i in sections) {
+						var contentType = sections[i].type.toLowerCase();
+						var target = url.concat(contentType+'section/'+( sections[i].id ||'' ));
+						var method = sections[i].id ? 'PATCH' : 'POST';
+
+						angular.extend(isuSectionProvider.defaults, { target: target, method: method});		
+						isuSectionProvider.callMethodToApi(sections[i]).then(function(success){
+
+							setSaveMessage(success.updated_at);
+
+						}, function(error){
+							throw new Error("Unable to update this " + contentType + ' section');
+						});
+			  		}
+			  	});
 
 				function getContent() {
 					for(var i in scope.$parent.$parent.sections) {
@@ -98,9 +144,41 @@ angular
 					}
 				}
 
+				function getSections() {
+					return scope.$parent.$parent.sections;
+				}
+
 				function setSaveMessage(updated_at) {
 					scope.saveMessage = 'Saved ' + $filter('date')(new Date(updated_at), 'h:mm:ss a');
 				}
+			}
+		}
+	}
+])
+.directive('deleteSectionable', ['isuSectionProvider', 
+	function(isuSectionProvider) {
+		return {
+			restrict: 'A',
+			require: '^sectionable',
+			link: function(scope, el, attrs, ctrl) {
+				el.bind('click', function(ev) {
+					ev.preventDefault();
+					ctrl.destroy(attrs.deleteSectionable);
+				});
+			}
+		}
+	}
+])
+.directive('moveSection', ['isuSectionProvider', 
+	function(isuSectionProvider) {
+		return {
+			restrict: 'A',
+			require: '^sectionable',
+			link: function(scope, el, attrs, ctrl) {
+				el.bind('click', function(ev) {
+					ev.preventDefault();
+					ctrl.move();
+				});
 			}
 		}
 	}
