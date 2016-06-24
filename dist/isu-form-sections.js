@@ -579,8 +579,8 @@ angular
 		}
 	}
 ])
-.directive('sectionable', ['isuSectionProvider', 'debouncer', '$filter', '$timeout', '$rootScope',
-	function(isuSectionProvider, debouncer, $filter, $timeout) {
+.directive('sectionable', ['isuSectionProvider', 'debouncer', '$timeout',
+	function(isuSectionProvider, debouncer, $timeout) {
 		return {
 			restrict: 'A',
 			scope: {
@@ -697,7 +697,7 @@ angular
 				}
 
 				function setSaveMessage(updated_at) {
-					scope.saveMessage = 'Saved ' + $filter('date')(new Date(updated_at), 'h:mm:ss a');
+					scope.saveMessage = 'Saved';
 				}
 			}
 		}
@@ -873,9 +873,11 @@ function profileSection($interpolate) {
 
 
 		},
-		template: ['<section style="order:'+s+'sections[$sIndex].order'+e+'" id="object-'+s+'sections[$sIndex].order'+e+'">',
+		template: ['<section style="order:'+s+'sections[$sIndex].order'+e+'" id="object-'+s+'sections[$sIndex].order'+e+'"',
+					'sectionable section-id="sections[$sIndex].id || null" save-message="saveMessage">',
 					'<md-toolbar>',
 					'<header>Profile Section</header>',
+					'<i class="display__save-messsage">'+s+'saveMessage'+e+'</i>',
 					'<a class="mdi button mdi-chevron-up" ng-click="create.move(sections[$sIndex].order, false)" move-section></a>',
 					'<a class="mdi button mdi-chevron-down" ng-click="create.move(sections[$sIndex].order, true)" move-section></a>',
 					'<a class="mdi button mdi-close" ng-click="create.remove(sections[$sIndex].order)" delete-sectionable="profile"></a>',

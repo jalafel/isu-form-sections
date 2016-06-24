@@ -31,8 +31,8 @@ angular
 		}
 	}
 ])
-.directive('sectionable', ['isuSectionProvider', 'debouncer', '$filter', '$timeout', '$rootScope',
-	function(isuSectionProvider, debouncer, $filter, $timeout) {
+.directive('sectionable', ['isuSectionProvider', 'debouncer', '$timeout',
+	function(isuSectionProvider, debouncer, $timeout) {
 		return {
 			restrict: 'A',
 			scope: {
@@ -149,7 +149,7 @@ angular
 				}
 
 				function setSaveMessage(updated_at) {
-					scope.saveMessage = 'Saved ' + $filter('date')(new Date(updated_at), 'h:mm:ss a');
+					scope.saveMessage = 'Saved';
 				}
 			}
 		}

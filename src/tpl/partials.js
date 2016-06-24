@@ -140,9 +140,11 @@ function profileSection($interpolate) {
 
 
 		},
-		template: ['<section style="order:'+s+'sections[$sIndex].order'+e+'" id="object-'+s+'sections[$sIndex].order'+e+'">',
+		template: ['<section style="order:'+s+'sections[$sIndex].order'+e+'" id="object-'+s+'sections[$sIndex].order'+e+'"',
+					'sectionable section-id="sections[$sIndex].id || null" save-message="saveMessage">',
 					'<md-toolbar>',
 					'<header>Profile Section</header>',
+					'<i class="display__save-messsage">'+s+'saveMessage'+e+'</i>',
 					'<a class="mdi button mdi-chevron-up" ng-click="create.move(sections[$sIndex].order, false)" move-section></a>',
 					'<a class="mdi button mdi-chevron-down" ng-click="create.move(sections[$sIndex].order, true)" move-section></a>',
 					'<a class="mdi button mdi-close" ng-click="create.remove(sections[$sIndex].order)" delete-sectionable="profile"></a>',
