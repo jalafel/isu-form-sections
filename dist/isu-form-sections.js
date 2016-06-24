@@ -916,9 +916,10 @@ function profileSection($interpolate) {
 					'<label>Subheading</label>',
 					'<input type="text" ng-model="sections[$sIndex].content.subheading"/>',
 					'</md-input-container>',
-					'</span>',
 
 					'<text-angular ng-model="sections[$sIndex].content.text"></text-angular>',
+
+					'</span>',
 
 					'<input type="hidden" ng-model="sections[$sIndex].content.image.description"/>',
 					'</fieldset>',
