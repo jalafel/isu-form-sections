@@ -906,7 +906,7 @@ function profileSection($interpolate) {
 
 					'<input class="md-button" type="file" name="sections['+s+'$sIndex'+e+'].content.image.file" ng-model="sections[$sIndex].content.image.file" file="sections[$sIndex].content.image.file"/>',
 						
-
+					'<span ng-if="(sections[$sIndex].content.image || sections[$sIndex].content.file_id")">',
 					'<md-input-container ng-if="sections[$sIndex].content.image">',
 					'<label>Heading</label>',
 					'<input type="text" ng-model="sections[$sIndex].content.heading"/>',
@@ -916,6 +916,7 @@ function profileSection($interpolate) {
 					'<label>Subheading</label>',
 					'<input type="text" ng-model="sections[$sIndex].content.subheading"/>',
 					'</md-input-container>',
+					'</span>',
 
 					'<text-angular ng-if="sections[$sIndex].content.image" ng-model="sections[$sIndex].content.text"></text-angular>',
 
