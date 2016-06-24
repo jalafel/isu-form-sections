@@ -120,8 +120,7 @@ angular.module('isu.provider', [])
 					data: fd || {},
 					transformRequest: angular.identity,
 					headers: {
-						'Content-Type': undefined,
-						'Keep-Alive': 'timeout=15, max=100'
+						'Content-Type': undefined
 					}
 				}).success(function(r) {
 					deferred.resolve(r);
