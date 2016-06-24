@@ -75,6 +75,7 @@ angular
 						isuSectionProvider.callMethodToApi(content).then(function(success){
 							setSaveMessage(success.updated_at);
 						}, function(error){
+							setErrorMessage();
 							throw new Error("Unable to update this " + contentType + ' section');
 						});
 				  	}
@@ -89,6 +90,7 @@ angular
 							content['id'] = success.id;
 							setSaveMessage(success.updated_at);
 						}, function(error){
+							setErrorMessage();
 							throw new Error("Unable to create a " + contentType + ' section');
 						});
 				  	}
@@ -104,12 +106,17 @@ angular
 
 			  	scope.$on('destroySectionFromView', function(ev, data) {
 			  		ev.preventDefault();
+
+			  		if(!scope.sectionId)
+			  			return;
+
 					var contentType = data.contentType.toLowerCase();
 			  		var target = url.concat(contentType+'section/'+scope.sectionId);
 
 					angular.extend(isuSectionProvider.defaults, { target: target, method: 'DELETE'});
 					isuSectionProvider.callMethodToApi().then(function(success){
 					}, function(error){
+						setErrorMessage();
 						throw new Error("Unable to delete this " + contentType + ' section');
 					});
 				})
@@ -120,6 +127,10 @@ angular
 			  		var sections = getSections();
 
 			  		for(var i in sections) {
+
+			  			if(sections[i].hasOwnProperty('_method') && sections[i]._method == 'DELETE')
+			  				return;
+
 						var contentType = sections[i].type.toLowerCase();
 						var target = url.concat(contentType+'section/'+( sections[i].id ||'' ));
 						var method = sections[i].id ? 'PATCH' : 'POST';
@@ -130,6 +141,7 @@ angular
 							setSaveMessage(success.updated_at);
 
 						}, function(error){
+							setErrorMessage();
 							throw new Error("Unable to update this " + contentType + ' section');
 						});
 			  		}
@@ -138,7 +150,7 @@ angular
 				function getContent() {
 					for(var i in scope.$parent.$parent.sections) {
 						var item = scope.$parent.$parent.sections[i];
-						if(item.order == scope.$parent.$sIndex) {
+						if(item.$$childScope.$sIndex == scope.$parent.$sIndex) {
 							return item;
 						}
 					}
@@ -146,6 +158,10 @@ angular
 
 				function getSections() {
 					return scope.$parent.$parent.sections;
+				}
+
+				function setErrorMessage() {
+					scope.saveMessage = 'Unable to save';
 				}
 
 				function setSaveMessage(updated_at) {

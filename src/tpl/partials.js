@@ -87,9 +87,10 @@ function inlineImageSection($interpolate) {
   		template: ['<section style="order:'+s+'sections[$sIndex].order'+e+'" id="object-'+s+'sections[$sIndex].order'+e+'">',
 					'<md-toolbar>',
 					'<header>Inline Image Section</header>',
-					'<a class="mdi button mdi-chevron-up" ng-click="create.move(sections[$sIndex].order, false)"></a>',
-					'<a class="mdi button mdi-chevron-down" ng-click="create.move(sections[$sIndex].order, true)"></a>',
-					'<a class="mdi button mdi-close" ng-click="create.remove(sections[$sIndex].order)"></a>',
+					'<i class="display__save-messsage">'+s+'saveMessage'+e+'</i>',
+					'<a class="mdi button mdi-chevron-up" ng-click="create.move(sections[$sIndex].order, false)" move-section></a>',
+					'<a class="mdi button mdi-chevron-down" ng-click="create.move(sections[$sIndex].order, true)" move-section></a>',
+					'<a class="mdi button mdi-close" ng-click="create.remove(sections[$sIndex].order)" delete-sectionable="inlineimage"></a>',
 					'</md-toolbar>',
 					'<fieldset ng-repeat="(rIndex, r) in imageFields">',
 
@@ -155,7 +156,7 @@ function profileSection($interpolate) {
 					'<img ng-src="/storage/app/'+s+'sections[$sIndex].image.filename'+e+'"/>',
 					'</span>',
 
-					'<input class="md-button" type="file" name="sections['+s+'$sIndex'+e+'].content.image.file" ng-model="sections[$sIndex].content.image.file"/>',
+					'<input class="md-button" type="file" name="sections['+s+'$sIndex'+e+'].content.image.file" ng-model="sections[$sIndex].content.image.file" file="sections[$sIndex].content.image.file"/>',
 						
 
 					'<md-input-container ng-if="sections[$sIndex].content.image">',
@@ -168,7 +169,7 @@ function profileSection($interpolate) {
 					'<input type="text" ng-model="sections[$sIndex].content.subheading"/>',
 					'</md-input-container>',
 
-					'<text-angular ng-model="sections[$sIndex].content.text"></text-angular>',
+					'<text-angular ng-if="sections[$sIndex].content.image" ng-model="sections[$sIndex].content.text"></text-angular>',
 
 					'<input type="hidden" ng-model="sections[$sIndex].content.image.description"/>',
 					'</fieldset>',
