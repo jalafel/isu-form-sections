@@ -36,7 +36,7 @@ angular.module('isu.provider', [])
             html: '<profile-section></profile-section>',
             url: '/section/tpl/ProfileSection.tpl.html',
             schemaIsArray: false,
-            schema: { text: null }
+            schema: { text: 'Describe this person ...' }
 	    }]
 	};
 	
