@@ -96,7 +96,7 @@ angular.module('isu.provider', [])
 	                			transformObjectToFormData(fd, i, t);
 
 
-	                	} else if(!angular.isUndefined(i))
+	                	} else if(!angular.isUndefined(i) && ( e.charAt(0) !== '$'))
 	                		fd.append(key+'['+e+']', i);
                 	});
                 }
