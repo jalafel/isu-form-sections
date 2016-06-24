@@ -84,7 +84,8 @@ function inlineImageSection($interpolate) {
 				}
 			})
 		},
-  		template: ['<section style="order:'+s+'sections[$sIndex].order'+e+'" id="object-'+s+'sections[$sIndex].order'+e+'">',
+  		template: ['<section style="order:'+s+'sections[$sIndex].order'+e+'" id="object-'+s+'sections[$sIndex].order'+e+'"',
+					'sectionable section-id="sections[$sIndex].id || null" save-message="saveMessage">',
 					'<md-toolbar>',
 					'<header>Inline Image Section</header>',
 					'<i class="display__save-messsage">'+s+'saveMessage'+e+'</i>',
