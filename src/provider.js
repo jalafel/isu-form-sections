@@ -73,6 +73,7 @@ angular.module('isu.provider', [])
 			*/
 			transformToFormData: function(data) {  //consider exporting this into a service library for personal usage;
 				var _fd = new FormData();
+
                 angular.forEach(data, function (val, key) {
                 	if(val === null || val === '' || angular.isUndefined(val)) return;
 
@@ -80,20 +81,24 @@ angular.module('isu.provider', [])
 	                    transformObjectToFormData(_fd, val, key);
 	                else if(key.charAt(0) !== '$' && typeof val === 'string' || typeof val === 'number')
 	                	_fd.append(key, val);
+	                else if(val instanceof File) {
+                		_fd.append(key, val);
+	                }
                 });
 
                 function transformObjectToFormData(fd, obj, key) {
                 	angular.forEach(obj, function(i, e){
                 		if(typeof i === 'object'){
                 			var t = key+'['+e+']';
-	                		if(i instanceof File)
+	                		if(i instanceof File){
 	                			fd.append(t, i)
+	                		}
 	                		// checks for primitive number and string that does not begin with $
-	                		if (typeof e === 'number' || e.charAt(0) !== '$')
+	                		if (typeof e === 'number' || ( e === 'string' && e.charAt(0) !== '$'))
 	                			transformObjectToFormData(fd, i, t);
 
 
-	                	} else if(!angular.isUndefined(i) && ( typeof e === 'number' || e.charAt(0) !== '$'))
+	                	} else if(!angular.isUndefined(i))
 	                		fd.append(key+'['+e+']', i);
                 	});
                 }
