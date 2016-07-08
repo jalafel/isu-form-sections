@@ -75,7 +75,10 @@ angular.module('isu.provider', [])
 				var _fd = new FormData();
 
                 angular.forEach(data, function (val, key) {
-                	if(val === null || val === '' || angular.isUndefined(val)) return;
+                	if(val === null || 
+                	   val === '' || 
+                	   angular.isUndefined(val) ||
+                	   key.charAt(0) === '$') return;
 
                 	if(typeof val === 'object' && Object.keys(val).length !== 0)
 	                    transformObjectToFormData(_fd, val, key);
@@ -89,6 +92,9 @@ angular.module('isu.provider', [])
                 function transformObjectToFormData(fd, obj, key) {
                 	angular.forEach(obj, function(i, e){
                 		if(typeof i === 'object'){
+
+                			if(e.charAt(0) === '$') return;
+
                 			var t = key+'['+e+']';
 	                		if(i instanceof File){
 	                			fd.append(t, i)
