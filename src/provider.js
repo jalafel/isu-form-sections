@@ -93,14 +93,14 @@ angular.module('isu.provider', [])
                 	angular.forEach(obj, function(i, e){
                 		if(typeof i === 'object'){
 
-                			if(e.charAt(0) === '$') return;
+                			if(typeof e === 'string' && e.charAt(0) === '$') return;
 
                 			var t = key+'['+e+']';
 	                		if(i instanceof File){
 	                			fd.append(t, i)
 	                		}
 	                		// checks for primitive number and string that does not begin with $
-	                		if (typeof e === 'number' || ( e === 'string' && e.charAt(0) !== '$'))
+	                		else if (Array.isArray(e) || typeof e === 'object' || typeof e === 'number' || ( typeof e === 'string' && e.charAt(0) !== '$'))
 	                			transformObjectToFormData(fd, i, t);
 
 

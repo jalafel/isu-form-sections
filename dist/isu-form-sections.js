@@ -96,14 +96,14 @@ angular.module('isu.provider', [])
                 	angular.forEach(obj, function(i, e){
                 		if(typeof i === 'object'){
 
-                			if(e.charAt(0) === '$') return;
+                			if(typeof e === 'string' && e.charAt(0) === '$') return;
 
                 			var t = key+'['+e+']';
 	                		if(i instanceof File){
 	                			fd.append(t, i)
 	                		}
 	                		// checks for primitive number and string that does not begin with $
-	                		if (typeof e === 'number' || ( e === 'string' && e.charAt(0) !== '$'))
+	                		else if (Array.isArray(e) || typeof e === 'object' || typeof e === 'number' || ( typeof e === 'string' && e.charAt(0) !== '$'))
 	                			transformObjectToFormData(fd, i, t);
 
 
@@ -859,7 +859,7 @@ function inlineImageSection($interpolate) {
 					'<img ng-src="/storage/app/'+s+'sections[$sIndex].content[rIndex].image.filename'+e+'"/>',
 					'</span>',
 
-					'<input class="md-button" type="file" name="sections['+s+'$sIndex'+e+'].content['+s+'rIndex'+e+'].image.file" ng-model="sections[$sIndex].content[rIndex].image.file"/>',
+					'<input class="md-button" type="file" name="sections['+s+'$sIndex'+e+'].content['+s+'rIndex'+e+'].image.file" ng-model="sections[$sIndex].content[rIndex].image.file" file="sections[$sIndex].content[rIndex].image.file"/>',
 					
 					'<md-input-container>',
 					'<label>Description</label>',
