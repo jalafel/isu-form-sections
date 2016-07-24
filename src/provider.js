@@ -141,6 +141,13 @@ angular.module('isu.provider', [])
 				});
 
 				return deferred.promise;
+			},
+
+			/**
+			*	Set file endpoint given the data type and id
+			*/
+			setFileEndpoint: function(dataType, id) {
+				this.defaults.fileEndpoint = dataType+'/'+id+'/file';
 			}
 		}
 	};
