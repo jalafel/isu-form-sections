@@ -3,7 +3,7 @@
 *	
 */
 angular
-.module('isu.file-upload', ['isu-provider'])
+.module('isu.file-upload', ['isu.provider'])
 .factory('isuFileUploadService', ['isuSectionProvider',
 	function(isuSectionProvider) {
 

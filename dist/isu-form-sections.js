@@ -1,5 +1,5 @@
 angular.module('isu-form-sections', ['isu.provider', 'isu.form-init', 
-	'isu.create-section', 'isu.sections', 'isu.templates', 'isu.sectionable', 'isu.file-upload']);
+	'isu.create-section', 'isu.sections', 'isu.templates', 'isu.sectionable']);
 
 /**
  * @description
@@ -414,7 +414,7 @@ angular
 *	
 */
 angular
-.module('isu.file-upload', ['isu-provider'])
+.module('isu.file-upload', ['isu.provider'])
 .factory('isuFileUploadService', ['isuSectionProvider',
 	function(isuSectionProvider) {
 
